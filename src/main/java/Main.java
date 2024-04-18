@@ -1,28 +1,50 @@
-import static com.raylib.Jaylib.RAYWHITE;
-import static com.raylib.Jaylib.VIOLET;
+import com.raylib.Jaylib;
+import examples.TexturesBunnymarkMoreJavaLike;
+
+import static com.raylib.Jaylib.*;
 import static com.raylib.Raylib.*;
 
 public class Main {
+    static class Col{
+        int r;
+        int g;
+        int b;
+        int a;
+    }
     public static void main(String args[]) {
-        InitWindow(800, 450, "Demo");
-        SetTargetFPS(60);
-        Camera3D camera = new Camera3D()
-                ._position(new Vector3().x(18).y(16).z(18))
-                .target(new Vector3())
-                .up(new Vector3().x(0).y(1).z(0))
-                .fovy(45).projection(CAMERA_PERSPECTIVE);
+        // Initialization
+        //--------------------------------------------------------------------------------------
+        int screenWidth = 800;
+        int screenHeight = 800;
 
-        while (!WindowShouldClose()) {
-            UpdateCamera(camera, CAMERA_ORBITAL);
+        InitWindow(screenWidth, screenHeight, "Summon The Will");
+
+        // Load GameObjects
+        gameObject Player = new gameObject(new Jaylib.Vector2(0,0), new Jaylib.Vector2(0,0), new Jaylib.Color(),"resources/wabbit_alpha.png");
+        //"resources/wabbit_alpha.png"
+
+        SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+        // --------------------------------------------------------------------------------------
+        while (!WindowShouldClose())    // Detect window close button or ESC key
+        {
+            //Input
+
+            //Update Positions
+
+            //Rendering
             BeginDrawing();
             ClearBackground(RAYWHITE);
-            BeginMode3D(camera);
-            DrawGrid(20, 1.0f);
-            EndMode3D();
-            DrawText("Hello world", 190, 200, 20, VIOLET);
-            DrawFPS(20, 20);
+
+
+            DrawRectangle(0, 0, screenWidth, 40, BLACK);
+            //DrawText(TextFormat("bunnies: "+bunniesCount), 120, 10, 20, GREEN);
+
+            DrawFPS(10, 10);
+
             EndDrawing();
         }
-        CloseWindow();
+
+        //UnloadTexture(texBunny);    // Unload bunny texture
+        CloseWindow();              // Close window and OpenGL context
     }
 }
